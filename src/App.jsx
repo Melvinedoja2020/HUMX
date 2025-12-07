@@ -1,10 +1,15 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Resturant from "./pages/Resturant";
+import Events from "./pages/Events";
 
 function App() {
   return (
     <>
-      <Resturant />
+      <Routes>
+        <Route path="/Resturant" element={<Resturant />} />
+        <Route path="/Events" element={<Events />} />
+      </Routes>
     </>
   );
 }
