@@ -113,7 +113,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
 
   const selectedRoom = useMemo(
     () => rooms.find((room) => room.slug === draft.roomSlug) ?? defaultRoom,
-    [draft.roomSlug]
+    [draft.roomSlug],
   );
 
   const pricing = useMemo(
@@ -124,7 +124,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
         roomPrice: selectedRoom?.price ?? 0,
         addOns: draft.addOns,
       }),
-    [draft.addOns, draft.checkIn, draft.checkOut, selectedRoom]
+    [draft.addOns, draft.checkIn, draft.checkOut, selectedRoom],
   );
 
   const openDrawer = useCallback((prefill: Partial<BookingDraft> = {}) => {
@@ -202,7 +202,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       selectedRoom,
       submitBooking,
       updateDraft,
-    ]
+    ],
   );
 
   return (

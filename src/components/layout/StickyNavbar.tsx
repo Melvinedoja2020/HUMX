@@ -36,7 +36,9 @@ export function StickyNavbar() {
   };
 
   return (
-    <header className={`fixed left-0 right-0 top-0 z-50 border-b ${wrapperClass}`}>
+    <header
+      className={`fixed left-0 right-0 top-0 z-50 border-b ${wrapperClass}`}
+    >
       <div className="container-custom flex h-[70px] md:h-[80px] w-full items-center justify-between">
         {/* Logo */}
         <Link
@@ -48,7 +50,9 @@ export function StickyNavbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={`hidden md:flex h-[50px] items-center rounded-full px-8 gap-1 ${centerPillClass}`}>
+        <nav
+          className={`hidden md:flex h-[50px] items-center rounded-full px-8 gap-1 ${centerPillClass}`}
+        >
           {navItems.map((item) => (
             <NavLink
               key={item.label}
@@ -106,11 +110,7 @@ export function StickyNavbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `px-4 py-3 text-[14px] font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? isDark
-                        ? "bg-white/10"
-                        : "bg-[#f5f5f5]"
-                      : ""
+                    isActive ? (isDark ? "bg-white/10" : "bg-[#f5f5f5]") : ""
                   }`
                 }
               >

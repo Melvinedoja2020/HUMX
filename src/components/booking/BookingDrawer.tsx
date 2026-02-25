@@ -27,9 +27,7 @@ export function BookingDrawer({ onClose }: BookingDrawerProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-[#e0e0e0]">
-          <h2 className="text-2xl font-bold text-[#1a1a1a]">
-            Book Your Stay
-          </h2>
+          <h2 className="text-2xl font-bold text-[#1a1a1a]">Book Your Stay</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-[#f5f5f5] rounded-lg transition-colors"
