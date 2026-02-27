@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useBooking } from "../../context/BookingContext";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
@@ -6,29 +6,13 @@ import { useState } from "react";
 const navItems = [
   { label: "Home", to: "/" },
   { label: "Rooms", to: "/rooms" },
-  { label: "Bookings", to: "/bookings" },
+  { label: "Amenities", to: "#amenities" },
+  { label: "Location", to: "#location" },
 ];
 
-const darkRoutes = new Set(["/"]);
-
 export function StickyNavbar() {
-  const location = useLocation();
   const { openDrawer } = useBooking();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const isDark = darkRoutes.has(location.pathname);
-
-  const wrapperClass = isDark
-    ? "bg-black/40 text-white border-white/10 backdrop-blur-xl"
-    : "bg-white/95 text-[#1a1a1a] border-[#e0e0e0] backdrop-blur-xl";
-
-  const centerPillClass = isDark
-    ? "bg-white/15 border border-white/20 text-white"
-    : "bg-[#f5f5f5] border border-[#e0e0e0] text-[#1a1a1a]";
-
-  const ctaClass = isDark
-    ? "bg-[#d4af37] text-[#1a1a1a] hover:bg-[#d4af37]/90 font-semibold"
-    : "bg-[#1a1a1a] text-white hover:bg-[#1a1a1a]/90 font-semibold";
 
   const handleBookingClick = () => {
     openDrawer();
@@ -36,36 +20,27 @@ export function StickyNavbar() {
   };
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-50 border-b ${wrapperClass}`}
-    >
-      <div className="container-custom flex h-[70px] md:h-[80px] w-full items-center justify-between">
+    <header className="fixed left-0 right-0 top-0 z-40 h-20 bg-white/88 border-b border-border backdrop-blur-sm">
+      <div className="container-custom flex h-full items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="inline-flex min-w-[100px] items-center gap-2 font-manrope font-bold text-[18px] md:text-[20px]"
+          className="font-manrope font-semibold text-lg tracking-wide text-text-primary"
         >
-          <span className="text-[20px] md:text-[24px]">✺</span>
-          <span>Grandoria</span>
+          GRANDORIA
         </Link>
 
         {/* Desktop Navigation */}
-        <nav
-          className={`hidden md:flex h-[50px] items-center rounded-full px-8 gap-1 ${centerPillClass}`}
-        >
+        <nav className="hidden md:flex gap-1">
           {navItems.map((item) => (
             <NavLink
               key={item.label}
               to={item.to}
               className={({ isActive }) =>
-                `px-4 py-2 text-[14px] font-medium transition-all duration-200 rounded-full ${
+                `px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                   isActive
-                    ? `${
-                        isDark
-                          ? "bg-white/20"
-                          : "bg-white border border-[#d4af37]"
-                      }`
-                    : `opacity-80 hover:opacity-100`
+                    ? "bg-light border border-border"
+                    : "text-text-secondary hover:text-text-primary"
                 }`
               }
             >
@@ -74,55 +49,60 @@ export function StickyNavbar() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <button
-          onClick={handleBookingClick}
-          className={`hidden md:block h-[46px] px-6 rounded-full text-[13px] font-semibold transition-all duration-200 ${ctaClass}`}
-        >
-          Book your stay
-        </button>
+        {/* Desktop Buttons */}
+        <div className="hidden md:flex gap-3">
+          <button className="btn-sm border border-border bg-white text-text-secondary hover:bg-light">
+            View booking
+          </button>
+          <button onClick={handleBookingClick} className="btn-primary">
+            Book Now
+          </button>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`md:hidden p-2 rounded-lg transition-colors ${
-            isDark ? "hover:bg-white/10" : "hover:bg-[#f5f5f5]"
-          }`}
+          className="md:hidden p-2 rounded-lg hover:bg-light transition-colors"
         >
           {mobileMenuOpen ? (
-            <FiX className="w-6 h-6" />
+            <FiX className="w-5 h-5 text-text-primary" />
           ) : (
-            <FiMenu className="w-6 h-6" />
+            <FiMenu className="w-5 h-5 text-text-primary" />
           )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div
-          className={`md:hidden border-t ${isDark ? "bg-black/60" : "bg-white/90"}`}
-        >
-          <nav className="container-custom flex flex-col py-4 gap-2">
+        <div className="md:hidden border-t border-border bg-white">
+          <nav className="container-custom flex flex-col py-4 gap-1">
             {navItems.map((item) => (
               <NavLink
                 key={item.label}
                 to={item.to}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `px-4 py-3 text-[14px] font-medium rounded-lg transition-colors ${
-                    isActive ? (isDark ? "bg-white/10" : "bg-[#f5f5f5]") : ""
+                  `px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? "bg-light"
+                      : "text-text-secondary hover:text-text-primary"
                   }`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
-            <button
-              onClick={handleBookingClick}
-              className={`w-full mt-2 px-4 py-3 rounded-lg text-[14px] font-semibold transition-colors ${ctaClass}`}
-            >
-              Book your stay
-            </button>
+            <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-border">
+              <button className="btn-sm w-full border border-border bg-white text-text-secondary hover:bg-light">
+                View booking
+              </button>
+              <button
+                onClick={handleBookingClick}
+                className="btn-primary w-full"
+              >
+                Book Now
+              </button>
+            </div>
           </nav>
         </div>
       )}

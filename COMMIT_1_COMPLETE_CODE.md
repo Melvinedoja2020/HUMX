@@ -11,8 +11,8 @@
 
 /* Root variables */
 :root {
-  --font-manrope: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-manrope:
+    "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --color-primary: #1a1a1a;
   --color-secondary: #666666;
   --color-accent: #d4af37;
@@ -185,7 +185,9 @@ export function StickyNavbar() {
   };
 
   return (
-    <header className={`fixed left-0 right-0 top-0 z-50 border-b ${wrapperClass}`}>
+    <header
+      className={`fixed left-0 right-0 top-0 z-50 border-b ${wrapperClass}`}
+    >
       <div className="container-custom flex h-[70px] md:h-[80px] w-full items-center justify-between">
         {/* Logo */}
         <Link
@@ -197,7 +199,9 @@ export function StickyNavbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={`hidden md:flex h-[50px] items-center rounded-full px-8 gap-1 ${centerPillClass}`}>
+        <nav
+          className={`hidden md:flex h-[50px] items-center rounded-full px-8 gap-1 ${centerPillClass}`}
+        >
           {navItems.map((item) => (
             <NavLink
               key={item.label}
@@ -255,11 +259,7 @@ export function StickyNavbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `px-4 py-3 text-[14px] font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? isDark
-                        ? "bg-white/10"
-                        : "bg-[#f5f5f5]"
-                      : ""
+                    isActive ? (isDark ? "bg-white/10" : "bg-[#f5f5f5]") : ""
                   }`
                 }
               >
@@ -400,7 +400,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
 
   const selectedRoom = useMemo(
     () => rooms.find((room) => room.slug === draft.roomSlug) ?? defaultRoom,
-    [draft.roomSlug]
+    [draft.roomSlug],
   );
 
   const pricing = useMemo(
@@ -411,7 +411,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
         roomPrice: selectedRoom?.price ?? 0,
         addOns: draft.addOns,
       }),
-    [draft.addOns, draft.checkIn, draft.checkOut, selectedRoom]
+    [draft.addOns, draft.checkIn, draft.checkOut, selectedRoom],
   );
 
   const openDrawer = useCallback((prefill: Partial<BookingDraft> = {}) => {
@@ -489,7 +489,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       selectedRoom,
       submitBooking,
       updateDraft,
-    ]
+    ],
   );
 
   return (
@@ -540,9 +540,7 @@ export function BookingDrawer({ onClose }: BookingDrawerProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-[#e0e0e0]">
-          <h2 className="text-2xl font-bold text-[#1a1a1a]">
-            Book Your Stay
-          </h2>
+          <h2 className="text-2xl font-bold text-[#1a1a1a]">Book Your Stay</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-[#f5f5f5] rounded-lg transition-colors"
@@ -644,7 +642,7 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </BookingProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
 ```
 
@@ -653,6 +651,7 @@ createRoot(document.getElementById("root")!).render(
 ## Tailwind Config
 
 **vite.config.js** (Existing - No Changes):
+
 ```javascript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
@@ -712,7 +711,8 @@ export default defineConfig({
 --color-error: #f44336;
 
 /* Font */
---font-manrope: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--font-manrope:
+  "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 ```
 
 ---
@@ -750,23 +750,47 @@ export default defineConfig({
 
 ```css
 @keyframes fadeInUp {
-  from: { opacity: 0; transform: translateY(20px); }
-  to: { opacity: 1; transform: translateY(0); }
+  from: {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to: {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInFromLeft {
-  from: { opacity: 0; transform: translateX(-30px); }
-  to: { opacity: 1; transform: translateX(0); }
+  from: {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to: {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInFromRight {
-  from: { opacity: 0; transform: translateX(30px); }
-  to: { opacity: 1; transform: translateX(0); }
+  from: {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to: {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes scaleIn {
-  from: { opacity: 0; transform: scale(0.95); }
-  to: { opacity: 1; transform: scale(1); }
+  from: {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to: {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 ```
 

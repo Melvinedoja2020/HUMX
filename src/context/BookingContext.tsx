@@ -112,7 +112,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   }, [bookings]);
 
   const selectedRoom = useMemo(
-    () => rooms.find((room) => room.slug === draft.roomSlug) ?? defaultRoom,
+    () => rooms.find((room: { slug: string; }) => room.slug === draft.roomSlug) ?? defaultRoom,
     [draft.roomSlug],
   );
 
