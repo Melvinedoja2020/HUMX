@@ -55,8 +55,8 @@ export function BookingProvider({ children }) {
     const nights = nightsBetween(form.checkIn, form.checkOut);
     const roomRate = room?.price ?? 0;
     const roomTotal = roomRate * nights;
-    const serviceFee = 65;
-    const taxes = Math.round(roomTotal * 0.12);
+    const serviceFee = 65000;
+    const taxes = Math.round(roomTotal * 0.075);
     const total = roomTotal + serviceFee + taxes;
 
     return { nights, roomRate, roomTotal, serviceFee, taxes, total };

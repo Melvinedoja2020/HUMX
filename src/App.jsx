@@ -6,12 +6,16 @@ import RoomDetailsPage from "./pages/RoomDetails";
 import BookingPage from "./pages/Booking";
 import ViewBookingsPage from "./pages/ViewBookings";
 import BookingConfirmationPage from "./pages/BookingConfirmation";
+import OurHotelPage from "./pages/OurHotel";
+import ContactPage from "./pages/Contact";
 
 export default function App() {
   return (
     <BookingProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/our-hotel" element={<OurHotelPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/rooms" element={<RoomsPage />} />
         <Route path="/rooms/:roomId" element={<RoomDetailsPage />} />
         <Route path="/booking" element={<BookingPage />} />

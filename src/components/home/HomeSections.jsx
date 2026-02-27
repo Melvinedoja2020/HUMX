@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import RoomTypeCard from "../rooms/RoomTypeCard";
+import { rooms } from "../../data/rooms";
 
 const GOLD = "#C9A96E";
 const CREAM = "#F5EFE6";
@@ -45,80 +47,29 @@ const TvIcon = () => (
 );
 
 const amenities = [
-  { icon: <MoonIcon />, title: "Premium Linens", desc: "Enjoy restful nights on a plush king-sized bed adorned with high-thread-count sheets and luxurious pillows." },
-  { icon: <BedIcon />, title: "Spacious Living Area", desc: "Relax in a generously sized living space with designer furnishings and elegant decor." },
-  { icon: <ForkIcon />, title: "Private Dining Room", desc: "Host intimate dinners in a secluded dining area, complete with a comfortable seating." },
-  { icon: <PotIcon />, title: "Fully Equipped Kitchenette", desc: "Prepare snacks and meals in a kitchenette fitted with modern appliances." },
-  { icon: <BathIcon />, title: "Luxurious Marble Bathroom", desc: "Pamper yourself in a lavish bathroom featuring a Jacuzzi tub, a rain shower, and premium toiletries." },
-  { icon: <TvIcon />, title: "High-Speed Wi-Fi and Smart TV", desc: "Stay connected and entertained with complimentary high-speed internet and a smart television." },
+  { icon: <MoonIcon />, title: "Premium Linens", desc: "Enjoy restful nights on plush premium bedding and layered comfort." },
+  { icon: <BedIcon />, title: "Spacious Living Area", desc: "Relax in generously sized living spaces with elegant furnishings." },
+  { icon: <ForkIcon />, title: "Private Dining", desc: "Host intimate in-room dinners with elevated service options." },
+  { icon: <PotIcon />, title: "Kitchenette", desc: "Prepare refreshments with modern appliances and curated essentials." },
+  { icon: <BathIcon />, title: "Marble Bathroom", desc: "Indulge in deep soaking tubs and rainfall shower experiences." },
+  { icon: <TvIcon />, title: "Fast Wi-Fi + Smart TV", desc: "Stay connected and entertained with premium digital access." },
 ];
 
-const rooms = [
-  {
-    name: "Royal Penthouse",
-    beds: "3 King Beds",
-    guests: "6 Person",
-    img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80",
-    desc: "A crown jewel of luxury, the Royal Penthouse offers sweeping panoramic views and bespoke furnishings.",
-  },
-  {
-    name: "Presidential Suite",
-    beds: "2 King Beds",
-    guests: "4 Person",
-    img: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
-    desc: "Experience unparalleled luxury in our Presidential Suite, designed for the discerning traveler.",
-  },
-];
-
-export function HomeLuxuryRooms({ hoveredRoom, onHoverChange }) {
+export function HomeLuxuryRooms() {
   return (
     <section id="rooms" className="bg-white py-16 px-12">
       <div className="reveal-up flex items-start justify-between mb-10">
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 400, color: "#1a1208", lineHeight: 1.1 }}>
-          Our Luxury Rooms
+          Our Room Types
         </h2>
         <Link to="/rooms" className="mt-3 px-6 py-2.5 rounded-full border text-sm text-neutral-700 hover:bg-neutral-50 transition-colors" style={{ borderColor: "#C9A96E", color: "#8B6914" }}>
           View All Rooms
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        {rooms.map((room, index) => (
-          <Link
-            key={room.name}
-            to="/rooms"
-            className="relative overflow-hidden cursor-pointer block"
-            style={{ borderRadius: 4, height: 560 }}
-            onMouseEnter={() => onHoverChange(index)}
-            onMouseLeave={() => onHoverChange(null)}
-          >
-            <img
-              src={room.img}
-              alt={room.name}
-              className="w-full h-full object-cover transition-transform duration-700"
-              style={{ transform: hoveredRoom === index ? "scale(1.04)" : "scale(1)" }}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-white text-lg mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>{room.name}</p>
-                  {hoveredRoom === index && (
-                    <p className="text-white/80 text-xs leading-relaxed" style={{ maxWidth: 260, fontWeight: 300 }}>{room.desc}</p>
-                  )}
-                </div>
-                <div className="flex items-center gap-5 text-white/90 text-xs" style={{ fontWeight: 300 }}>
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M3 18V10a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v8"/><path d="M3 18h22v3H3z"/><path d="M7 8v4h6V8"/></svg>
-                    {room.beds}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3"><circle cx="14" cy="8" r="4"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-                    {room.guests}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {rooms.slice(0, 4).map((room) => (
+          <RoomTypeCard key={room.id} room={room} />
         ))}
       </div>
     </section>
@@ -135,11 +86,11 @@ export function HomeActivities() {
           in our Hotel
         </h2>
         <p className="text-sm leading-relaxed mb-10" style={{ color: "#5a4a35", fontWeight: 300, maxWidth: 380 }}>
-          Discover a realm where opulence meets tranquility, where every moment is a symphony of relaxation and refinement. Our sanctuary of luxury and comfort awaits your arrival.
+          Discover a realm where opulence meets tranquility, where every moment is a symphony of relaxation and refinement.
         </p>
-        <button className="px-8 py-3 rounded-full border text-sm hover:bg-white/60 transition-colors" style={{ borderColor: "#C9A96E", color: "#6b4f1a" }}>
+        <Link to="/our-hotel" className="inline-block px-8 py-3 rounded-full border text-sm hover:bg-white/60 transition-colors" style={{ borderColor: "#C9A96E", color: "#6b4f1a" }}>
           Learn More
-        </button>
+        </Link>
       </div>
 
       <div className="reveal-right flex-1 relative" style={{ height: 520 }}>
@@ -190,8 +141,8 @@ export function HomeGuestStories() {
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 400, color: "#1a1208", lineHeight: 1.1 }}>
           Guest Stories
         </h2>
-        <Link to="/booking" className="px-8 py-3 rounded-full border text-sm hover:bg-neutral-50 transition-colors" style={{ borderColor: "#C9A96E", color: "#8B6914" }}>
-          Reserve Now
+        <Link to="/rooms" className="px-8 py-3 rounded-full border text-sm hover:bg-neutral-50 transition-colors" style={{ borderColor: "#C9A96E", color: "#8B6914" }}>
+          Choose Room
         </Link>
       </div>
 

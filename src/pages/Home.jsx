@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import HotelNavbar from "../components/site/HotelNavbar";
 import HotelFooter from "../components/site/HotelFooter";
 import {
@@ -32,31 +32,13 @@ function loadGSAP() {
   });
 }
 
-export default function HotelBeachHome() {
-  const location = useLocation();
+export default function HomePage() {
   const navigate = useNavigate();
   const navRef = useRef(null);
   const dividerRef = useRef(null);
   const subRef = useRef(null);
   const btnRef = useRef(null);
   const circleRef = useRef(null);
-  const [hoveredRoom, setHoveredRoom] = useState(null);
-
-  useEffect(() => {
-    const scrollTarget = location.state?.scrollTo || location.hash?.replace("#", "");
-    if (scrollTarget) {
-      setTimeout(() => {
-        const target = document.getElementById(scrollTarget);
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 120);
-
-      if (location.state?.scrollTo) {
-        navigate(location.pathname, { replace: true, state: {} });
-      }
-    }
-  }, [location, navigate]);
 
   useEffect(() => {
     loadGSAP().then((gsap) => {
@@ -115,11 +97,11 @@ export default function HotelBeachHome() {
 
   return (
     <div style={{ fontFamily: "'Jost', sans-serif", margin: 0, padding: 0 }}>
-      <section id="top" className="relative w-full overflow-hidden" style={{ height: "100vh" }}>
+      <section className="fixed top-0 left-0 right-0 z-0 overflow-hidden" style={{ height: "100vh" }}>
         <img
           src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
           alt="Beach"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/60" />
 
@@ -163,21 +145,23 @@ export default function HotelBeachHome() {
         <button
           ref={circleRef}
           type="button"
-          onClick={() => navigate("/booking")}
+          onClick={() => navigate("/rooms")}
           className="absolute z-20 flex items-center justify-center rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
           style={{ width: 148, height: 148, bottom: 90, right: 80, background: "rgba(210,195,155,0.92)", fontFamily: "'Cormorant Garamond', serif", fontSize: 17, fontWeight: 500, color: "#2a2015", lineHeight: 1.3, boxShadow: "0 8px 40px rgba(0,0,0,0.25)", border: "none" }}
         >
-          Book Your
+          Select
           <br />
-          Stay
+          Room
         </button>
       </section>
 
-      <HomeLuxuryRooms hoveredRoom={hoveredRoom} onHoverChange={setHoveredRoom} />
-      <HomeActivities />
-      <HomeAmenities />
-      <HomeGuestStories />
-      <HotelFooter />
+      <main className="relative z-20 bg-white pt-[100vh]">
+        <HomeLuxuryRooms />
+        <HomeActivities />
+        <HomeAmenities />
+        <HomeGuestStories />
+        <HotelFooter />
+      </main>
     </div>
   );
 }
