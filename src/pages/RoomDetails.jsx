@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { rooms } from "../data/rooms";
+import HotelNavbar from "../components/site/HotelNavbar";
+import HotelFooter from "../components/site/HotelFooter";
 
 const GOLD = "#C9A96E";
 const CREAM = "#F5EFE6";
@@ -58,6 +60,7 @@ export default function RoomDetailsPage() {
       <section className="relative w-full overflow-hidden" style={{ height: 420 }}>
         <img src={room.image} alt={room.name} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
+        <HotelNavbar tone="light" />
         <div className="absolute bottom-10 left-12">
           <p className="text-xs tracking-wider uppercase text-white/80">Room Collection</p>
           <h1
@@ -133,6 +136,7 @@ export default function RoomDetailsPage() {
           </p>
         </div>
       </section>
+      <HotelFooter />
     </div>
   );
 }

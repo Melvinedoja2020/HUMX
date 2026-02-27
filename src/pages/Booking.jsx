@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { rooms } from "../data/rooms";
+import HotelNavbar from "../components/site/HotelNavbar";
+import HotelFooter from "../components/site/HotelFooter";
 import { useBooking } from "../context/BookingContext";
 
 const GOLD = "#C9A96E";
@@ -76,6 +78,7 @@ export default function BookingPage() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
+        <HotelNavbar tone="light" />
         <div className="absolute bottom-10 left-12">
           <h1
             className="booking-title text-white"
@@ -206,6 +209,7 @@ export default function BookingPage() {
           </aside>
         </form>
       </section>
+      <HotelFooter />
     </div>
   );
 }

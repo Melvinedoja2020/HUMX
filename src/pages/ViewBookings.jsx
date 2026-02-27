@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { rooms } from "../data/rooms";
+import HotelNavbar from "../components/site/HotelNavbar";
+import HotelFooter from "../components/site/HotelFooter";
 import { useBooking } from "../context/BookingContext";
 
 const GOLD = "#C9A96E";
@@ -42,8 +44,12 @@ export default function ViewBookingsPage() {
   const recent = bookings.slice(0, 6);
 
   return (
-    <main style={{ background: CREAM, minHeight: "100vh", fontFamily: "'Jost', sans-serif" }} className="px-12 py-16">
-      <div className="mx-auto max-w-5xl">
+    <div style={{ background: CREAM, minHeight: "100vh", fontFamily: "'Jost', sans-serif" }}>
+      <div className="relative h-24">
+        <HotelNavbar tone="dark" />
+      </div>
+      <main className="px-12 py-8">
+        <div className="mx-auto max-w-5xl">
         <p className="text-xs uppercase tracking-wider" style={{ color: "#a89070" }}>Reservations</p>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 50, fontWeight: 400, color: "#1a1208", lineHeight: 1.05 }}>
           Recent Bookings
@@ -92,7 +98,9 @@ export default function ViewBookingsPage() {
             })}
           </div>
         )}
-      </div>
-    </main>
+        </div>
+      </main>
+      <HotelFooter />
+    </div>
   );
 }
