@@ -1,10 +1,24 @@
-import HomePage from "./pages/Home";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { BookingProvider } from "./context/BookingContext";
+import HomePage from "./pages/Home";
+import RoomsPage from "./pages/Rooms";
+import RoomDetailsPage from "./pages/RoomDetails";
+import BookingPage from "./pages/Booking";
+import ViewBookingsPage from "./pages/ViewBookings";
+import BookingConfirmationPage from "./pages/BookingConfirmation";
 
 export default function App() {
   return (
     <BookingProvider>
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/rooms" element={<RoomsPage />} />
+        <Route path="/rooms/:roomId" element={<RoomDetailsPage />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/booking/view" element={<ViewBookingsPage />} />
+        <Route path="/confirmation" element={<BookingConfirmationPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </BookingProvider>
   );
 }
