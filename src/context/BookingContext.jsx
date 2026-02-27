@@ -1,154 +1,122 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { rooms } from "../data/rooms";
-import { buildBookingReference, buildPricing } from "../lib/booking";
 
-const BOOKING_STORAGE_KEY = "humx.bookings";
+const STORAGE_KEY = "lodr_bookings";
 
-const defaultRoom = rooms[0];
-
-const buildDefaultDraft = () => ({
-  hotel: "Grandoria Hotel",
+const defaultForm = {
+  name: "",
+  email: "",
   checkIn: "",
   checkOut: "",
-  adults: 2,
-  children: 0,
-  roomSlug: defaultRoom?.slug ?? "",
-  addOns: {
-    breakfast: true,
-    airportPickup: false,
-  },
-});
+  guests: 2,
+  roomId: rooms[0]?.id ?? "",
+};
 
 const BookingContext = createContext(null);
 
-export const BookingProvider = ({ children }) => {
-  const [isBookingOpen, setBookingOpen] = useState(false);
-  const [draft, setDraft] = useState(buildDefaultDraft());
+function makeReference() {
+  return `LDR-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+}
+
+function nightsBetween(checkIn, checkOut) {
+  if (!checkIn || !checkOut) return 1;
+  const start = new Date(checkIn);
+  const end = new Date(checkOut);
+  const dayMs = 1000 * 60 * 60 * 24;
+  const diff = Math.ceil((end.getTime() - start.getTime()) / dayMs);
+  return Number.isFinite(diff) && diff > 0 ? diff : 1;
+}
+
+export function BookingProvider({ children }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [form, setForm] = useState(defaultForm);
   const [bookings, setBookings] = useState([]);
-  const [lastBooking, setLastBooking] = useState(null);
+  const [confirmation, setConfirmation] = useState(null);
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(BOOKING_STORAGE_KEY);
+      const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
         setBookings(parsed);
-        setLastBooking(parsed[0] ?? null);
       }
     } catch {
-      // Ignore malformed local storage and continue with empty state.
+      setBookings([]);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(bookings));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
   }, [bookings]);
 
-  const selectedRoom = useMemo(
-    () => rooms.find((room) => room.slug === draft.roomSlug) ?? defaultRoom,
-    [draft.roomSlug]
-  );
+  const summary = useMemo(() => {
+    const room = rooms.find((item) => item.id === form.roomId) ?? rooms[0];
+    const nights = nightsBetween(form.checkIn, form.checkOut);
+    const roomRate = room?.price ?? 0;
+    const roomTotal = roomRate * nights;
+    const serviceFee = 65;
+    const taxes = Math.round(roomTotal * 0.12);
+    const total = roomTotal + serviceFee + taxes;
 
-  const pricing = useMemo(
-    () =>
-      buildPricing({
-        checkIn: draft.checkIn,
-        checkOut: draft.checkOut,
-        roomPrice: selectedRoom?.price ?? 0,
-        addOns: draft.addOns,
-      }),
-    [draft.addOns, draft.checkIn, draft.checkOut, selectedRoom]
-  );
+    return { nights, roomRate, roomTotal, serviceFee, taxes, total };
+  }, [form.checkIn, form.checkOut, form.roomId]);
 
-  const openBooking = useCallback((prefill = {}, openDrawer = true) => {
-    setDraft((current) => ({
-      ...current,
-      ...prefill,
-      addOns: {
-        ...current.addOns,
-        ...(prefill.addOns ?? {}),
-      },
-    }));
+  const openBooking = (prefill = {}) => {
+    setForm((current) => ({ ...current, ...prefill }));
+    setConfirmation(null);
+    setIsOpen(true);
+  };
 
-    if (openDrawer) {
-      setBookingOpen(true);
-    }
-  }, []);
+  const closeBooking = () => {
+    setIsOpen(false);
+  };
 
-  const closeBooking = useCallback(() => setBookingOpen(false), []);
+  const clearConfirmation = () => {
+    setConfirmation(null);
+  };
 
-  const updateDraft = useCallback((updates) => {
-    setDraft((current) => ({
-      ...current,
-      ...updates,
-      addOns: {
-        ...current.addOns,
-        ...(updates.addOns ?? {}),
-      },
-    }));
-  }, []);
+  const updateField = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
 
-  const submitBooking = useCallback(() => {
-    const reference = buildBookingReference();
-
-    const entry = {
-      id: reference,
-      reference,
+  const submitBooking = () => {
+    const record = {
+      ...form,
+      reference: makeReference(),
+      total: summary.total,
       createdAt: new Date().toISOString(),
-      hotel: draft.hotel,
-      checkIn: draft.checkIn,
-      checkOut: draft.checkOut,
-      guests: {
-        adults: draft.adults,
-        children: draft.children,
-      },
-      roomSlug: selectedRoom.slug,
-      roomName: selectedRoom.name,
-      addOns: draft.addOns,
-      pricing,
     };
 
-    setBookings((current) => [entry, ...current].slice(0, 12));
-    setLastBooking(entry);
-    return entry;
-  }, [draft, pricing, selectedRoom]);
+    setBookings((current) => [record, ...current]);
+    setConfirmation(record);
+    return record;
+  };
 
-  const value = useMemo(
-    () => ({
-      isBookingOpen,
-      draft,
-      selectedRoom,
-      pricing,
-      bookings,
-      lastBooking,
-      openBooking,
-      closeBooking,
-      updateDraft,
-      submitBooking,
-      setDraft,
-    }),
-    [
-      bookings,
-      closeBooking,
-      draft,
-      isBookingOpen,
-      lastBooking,
-      openBooking,
-      pricing,
-      selectedRoom,
-      submitBooking,
-      updateDraft,
-    ]
+  return (
+    <BookingContext.Provider
+      value={{
+        isOpen,
+        form,
+        bookings,
+        confirmation,
+        openBooking,
+        closeBooking,
+        updateField,
+        submitBooking,
+        clearConfirmation,
+        summary,
+      }}
+    >
+      {children}
+    </BookingContext.Provider>
   );
+}
 
-  return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>;
-};
-
-export const useBooking = () => {
+export function useBooking() {
   const context = useContext(BookingContext);
   if (!context) {
-    throw new Error("useBooking must be used inside BookingProvider");
+    throw new Error("useBooking must be used within BookingProvider");
   }
   return context;
-};
+}
