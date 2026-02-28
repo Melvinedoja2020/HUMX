@@ -37,6 +37,10 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .facility-track {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {
@@ -45,4 +49,19 @@ h3 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@keyframes facilityMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.facility-track {
+  width: max-content;
+  animation: facilityMarquee 34s linear infinite;
+  will-change: transform;
 }

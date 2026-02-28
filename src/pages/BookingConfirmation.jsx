@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import HotelNavbar from "../components/site/HotelNavbar";
 import HotelFooter from "../components/site/HotelFooter";
@@ -43,10 +43,10 @@ export default function BookingConfirmationPage() {
   if (!booking) {
     return (
       <div style={{ background: CREAM, minHeight: "100vh", fontFamily: "'Jost', sans-serif" }}>
-        <div className="relative h-24"><HotelNavbar tone="dark" /></div>
-        <main className="px-12 py-8">
-          <div className="confirm-card mx-auto max-w-3xl rounded-[4px] bg-white px-10 py-10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 400, color: "#1a1208" }}>No booking found</h1>
+        <div className="relative h-20 sm:h-24"><HotelNavbar tone="dark" /></div>
+        <main className="px-4 py-8 sm:px-6 lg:px-12">
+          <div className="confirm-card mx-auto max-w-3xl rounded-[8px] bg-white px-6 py-8 shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:px-10 sm:py-10">
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px,4.8vw,44px)", fontWeight: 400, color: "#1a1208" }}>No booking found</h1>
             <p className="mt-4 text-sm" style={{ color: "#6b5a45", fontWeight: 300 }}>
               We could not locate a recent reservation. Start by selecting a room.
             </p>
@@ -62,15 +62,15 @@ export default function BookingConfirmationPage() {
 
   return (
     <div style={{ background: CREAM, minHeight: "100vh", fontFamily: "'Jost', sans-serif" }}>
-      <div className="relative h-24"><HotelNavbar tone="dark" /></div>
-      <main className="px-12 py-8">
-        <div className="confirm-card mx-auto max-w-4xl rounded-[4px] bg-white px-10 py-10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+      <div className="relative h-20 sm:h-24"><HotelNavbar tone="dark" /></div>
+      <main className="px-4 py-8 sm:px-6 lg:px-12">
+        <div className="confirm-card mx-auto max-w-4xl rounded-[8px] bg-white px-6 py-8 shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:px-10 sm:py-10">
           <p className="text-xs uppercase tracking-wider" style={{ color: "#a89070" }}>Booking Confirmed</p>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 400, color: "#1a1208", lineHeight: 1.1 }}>
-            Your stay is reserved.
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(38px,5vw,48px)", fontWeight: 400, color: "#1a1208", lineHeight: 1.1 }}>
+            Your HUMX stay is reserved.
           </h1>
 
-          <div className="mt-8 grid gap-4 rounded-[4px] border px-6 py-6 text-sm md:grid-cols-2" style={{ borderColor: "#e8e0d4", color: "#4a3a28" }}>
+          <div className="mt-8 grid gap-4 rounded-[8px] border px-5 py-6 text-sm md:grid-cols-2 sm:px-6" style={{ borderColor: "#e8e0d4", color: "#4a3a28" }}>
             <p><span style={{ color: "#a89070" }}>Reference:</span> <strong>{booking.reference}</strong></p>
             <p><span style={{ color: "#a89070" }}>Room:</span> {room?.name ?? booking.roomId}</p>
             <p><span style={{ color: "#a89070" }}>Dates:</span> {booking.checkIn} to {booking.checkOut}</p>

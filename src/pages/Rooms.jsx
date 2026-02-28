@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import RoomTypeCard from "../components/rooms/RoomTypeCard";
 import HotelNavbar from "../components/site/HotelNavbar";
@@ -14,7 +14,8 @@ function loadGSAP() {
     s.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
     s.onload = () => {
       const s2 = document.createElement("script");
-      s2.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js";
+      s2.src =
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js";
       s2.onload = () => {
         window.gsap.registerPlugin(window.ScrollTrigger);
         resolve(window.gsap);
@@ -53,32 +54,52 @@ export default function RoomsPage() {
 
   return (
     <div style={{ fontFamily: "'Jost', sans-serif", background: CREAM }}>
-      <section className="fixed top-0 left-0 right-0 z-0 overflow-hidden" style={{ height: 420 }}>
+      <section
+        className="fixed left-0 right-0 top-0 z-0 overflow-hidden"
+        style={{ height: 360 }}
+      >
         <img
-          src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1920&q=80"
-          alt="Rooms banner"
+          src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=1920&q=80"
+          alt="HUMX rooms"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
         <HotelNavbar tone="light" />
-        <div className="absolute bottom-10 left-12">
+        <div className="absolute bottom-8 left-4 sm:left-6 lg:left-12">
           <h1
             className="rooms-banner-title text-white"
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px,5vw,64px)", fontWeight: 300 }}
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "clamp(40px,5vw,62px)",
+              fontWeight: 300,
+            }}
           >
-            Room Types
+            HUMX Room Types
           </h1>
-          <p className="mt-2 text-sm text-white/85">Regular, Deluxe, Suite, Presidential</p>
+          <p className="mt-2 text-sm text-white/85">
+            Regular, Deluxe, Suite, Presidential
+          </p>
         </div>
       </section>
 
-      <main className="relative z-20 bg-white pt-[420px]">
-        <section className="px-12 py-16">
-          <div className="mb-8 flex items-end justify-between">
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 400, color: "#1a1208" }}>
+      <main className="relative z-20 mt-[360px]" style={{ background: CREAM }}>
+        <section className="px-4 py-12 sm:px-6 lg:px-12 lg:py-16">
+          <div className="mb-8 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
+            <h2
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "clamp(36px,4.8vw,44px)",
+                fontWeight: 400,
+                color: "#1a1208",
+              }}
+            >
               Available Rooms
             </h2>
-            <Link to="/booking/view" className="rounded-full border px-7 py-2.5 text-sm" style={{ borderColor: "#C9A96E", color: "#8B6914" }}>
+            <Link
+              to="/booking/view"
+              className="rounded-full border px-7 py-2.5 text-sm"
+              style={{ borderColor: "#C9A96E", color: "#8B6914" }}
+            >
               View My Bookings
             </Link>
           </div>

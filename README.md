@@ -1,18 +1,49 @@
-# React + Vite
+# HUMX Hotel Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, responsive hotel website built with Vite, React, JavaScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Stack
+- Vite
+- React (JavaScript)
+- React Router
+- Tailwind CSS
+- GSAP (loaded in-page for section motion)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Fixed hero/banner layout with layered scroll sections
+- Fully responsive pages across mobile, tablet, and desktop
+- Room catalog with four room types:
+  - Regular
+  - Deluxe
+  - Suite
+  - Presidential
+- Room detail pages with streamlined booking form
+- Local booking persistence via `localStorage` (`lodr_bookings`)
+- Booking confirmation and booking history pages
 
-## React Compiler
+## Routes
+- `/` Home
+- `/our-hotel` Hotel profile
+- `/rooms` Room listing
+- `/rooms/:roomId` Room details + booking
+- `/booking` Booking redirect route
+- `/booking/view` Booking history
+- `/confirmation` Booking confirmation
+- `/contact` Contact page
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Run Locally
+```bash
+npm install
+npm run dev
+```
 
-Note: This will impact Vite dev & build performances.
+## Build
+```bash
+npm run build
+npm run preview
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Notes
+- The project is JavaScript-only (no TypeScript).
+- Room pricing is formatted in Nigerian Naira (NGN).
+- Design language and section styling are aligned across all pages.

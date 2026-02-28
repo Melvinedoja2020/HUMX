@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { formatNaira } from "../../data/rooms";
 
@@ -5,8 +6,8 @@ export default function RoomTypeCard({ room, className = "", compact = false }) 
   return (
     <Link
       to={`/rooms/${room.id}`}
-      className={`group relative block overflow-hidden ${className}`}
-      style={{ borderRadius: 4, height: compact ? 520 : 560 }}
+      className={`group relative block overflow-hidden rounded-[8px] ${className}`}
+      style={{ height: compact ? 420 : 500 }}
     >
       <img
         src={room.thumbImg}
@@ -16,11 +17,11 @@ export default function RoomTypeCard({ room, className = "", compact = false }) 
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/38 to-transparent opacity-95" />
 
-      <div className="absolute inset-x-0 bottom-0 p-6">
+      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
         <p className="text-[11px] uppercase tracking-[0.18em] text-[#d6c6a8]">{room.category}</p>
         <h3
           className="mt-1 text-white"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 400, lineHeight: 1 }}
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(30px,4.2vw,36px)", fontWeight: 400, lineHeight: 1 }}
         >
           {room.name}
         </h3>
@@ -29,7 +30,7 @@ export default function RoomTypeCard({ room, className = "", compact = false }) 
           {room.description}
         </p>
 
-        <div className="mt-4 flex items-center justify-between text-xs text-white/90">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-white/90">
           <span>{room.size} · {room.guests}</span>
           <span>{formatNaira(room.price)} / night</span>
         </div>
