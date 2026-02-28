@@ -1,37 +1,29 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Resturant from "./pages/Resturant";
-import Events from "./pages/Events";
-import Gallery from "./pages/Gallery";
-import Amenities from "./components/Amenities";
-import Navbar from "./components/Navbar";
-import AboutPage from "./pages/About";
-import Footer from "./components/Footer";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { BookingProvider } from "./context/BookingContext";
+import HomePage from "./pages/Home";
+import RoomsPage from "./pages/Rooms";
+import RoomDetailsPage from "./pages/RoomDetails";
+import BookingPage from "./pages/Booking";
+import ViewBookingsPage from "./pages/ViewBookings";
+import BookingConfirmationPage from "./pages/BookingConfirmation";
+import OurHotelPage from "./pages/OurHotel";
+import ContactPage from "./pages/Contact";
 
-import AmenitiesPage from "./pages/Amenities";
-import Rooms from "./pages/Rooms";
-import ContactForm from "./pages/Contacts";
-import LocationPage from "./pages/Location";
-
-function App() {
+export default function App() {
   return (
-    <>
-      <Navbar />
-
+    <BookingProvider>
       <Routes>
-        <Route path="/" element={<Amenities />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/Resturant" element={<Resturant />} />
-        <Route path="/Events" element={<Events />} />
-        <Route path="/Gallery" element={<Gallery />} />
-        <Route path="/rooms" element={<Rooms />} />
-        <Route path="/Amenities" element={<AmenitiesPage />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/location" element={<LocationPage/>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/our-hotel" element={<OurHotelPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/rooms" element={<RoomsPage />} />
+        <Route path="/rooms/:roomId" element={<RoomDetailsPage />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/booking/view" element={<ViewBookingsPage />} />
+        <Route path="/confirmation" element={<BookingConfirmationPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer />
-    </>
+    </BookingProvider>
   );
 }
-
-export default App;
