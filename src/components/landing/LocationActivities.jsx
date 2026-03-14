@@ -19,9 +19,9 @@ import {
 import { PiBuildingApartment, PiBicycle } from "react-icons/pi";
 import { TbMusic, TbBuildingStore } from "react-icons/tb";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import { COLORS } from "../../constants/theme";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 
 const LOCATION_CARDS = [
   {
@@ -105,10 +105,8 @@ export default function LocationActivities() {
           />
         </Motion.div>
 
-        {/* 3-col layout: 2 cards left + right panel */}
         <div className="grid lg:grid-cols-3 gap-5">
-          {/* Left: 2x2 activity cards */}
-          <div className="lg:col-span-2 grid grid-cols-2 gap-5">
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {LOCATION_CARDS.map((card, i) => {
               const DistIcon = card.distanceIcon;
               return (
@@ -118,14 +116,12 @@ export default function LocationActivities() {
                   className="bg-white rounded-2xl overflow-hidden"
                   style={{ boxShadow: "0 1px 8px rgba(0,0,0,0.07)" }}
                 >
-                  {/* Image with distance pill */}
                   <div className="relative" style={{ height: 175 }}>
                     <Img
                       src={card.img}
                       alt={card.title}
                       className="w-full h-full object-cover"
                     />
-                    {/* Distance pill top-right */}
                     <span
                       className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
                       style={{
@@ -139,7 +135,6 @@ export default function LocationActivities() {
                     </span>
                   </div>
 
-                  {/* Card body */}
                   <div className="p-5">
                     <h4
                       className="font-bold mb-2"
@@ -157,7 +152,6 @@ export default function LocationActivities() {
                     >
                       {card.desc}
                     </p>
-                    {/* Tags */}
                     <div className="flex gap-4">
                       {card.tags.map((t) => {
                         const TagIcon = t.icon;
@@ -179,13 +173,11 @@ export default function LocationActivities() {
             })}
           </div>
 
-          {/* Right: Prime Location Benefits panel */}
           <Motion.div
             {...fadeUp(0.2)}
             className="rounded-2xl flex flex-col p-7"
             style={{ background: "#2d5a3d" }}
           >
-            {/* Pin icon circle */}
             <div
               className="flex items-center justify-center rounded-full mx-auto mb-5"
               style={{
@@ -214,7 +206,6 @@ export default function LocationActivities() {
               pharetra augue.
             </p>
 
-            {/* Benefit rows */}
             <div className="flex flex-col gap-3 flex-1">
               {BENEFITS.map((b) => {
                 const BIcon = b.icon;
@@ -252,7 +243,6 @@ export default function LocationActivities() {
               })}
             </div>
 
-            {/* CTA button */}
             <button
               className="mt-6 w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
               style={{ background: "white", color: "#2d5a3d" }}

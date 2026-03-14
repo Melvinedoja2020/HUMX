@@ -1,4 +1,4 @@
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 
 export default function SectionHeader({ tag, title, sub }) {
   return (

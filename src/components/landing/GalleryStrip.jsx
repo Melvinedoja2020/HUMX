@@ -1,11 +1,10 @@
 import { useRef } from "react";
 import { motion as Motion } from "framer-motion";
-import { FiEye, FiImage } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 import { TbLayoutGrid } from "react-icons/tb";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS } from "../../constants/theme";
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 import { GALLERY_IMAGES } from "../../constants/content";
 
 export default function GalleryStrip() {
@@ -22,7 +21,6 @@ export default function GalleryStrip() {
           />
         </Motion.div>
 
-        {/* Scrollable carousel row */}
         <Motion.div
           {...fadeUp(0.1)}
           ref={scrollRef}
@@ -70,7 +68,6 @@ export default function GalleryStrip() {
                 height: 260,
               }}
               onClick={() => {
-                // Only navigate if not dragging
                 if (scrollRef.current?.dataset.dragging !== "true") {
                   window.location.href = "/gallery";
                 }
@@ -82,7 +79,6 @@ export default function GalleryStrip() {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-              {/* Dark overlay on hover */}
               <div
                 className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 flex items-center justify-center"
                 style={{ background: "rgba(0,0,0,0.38)" }}
@@ -102,7 +98,6 @@ export default function GalleryStrip() {
           ))}
         </Motion.div>
 
-        {/* CTA button */}
         <Motion.div {...fadeUp(0.3)} className="flex justify-center mt-10">
           <a
             href="/gallery"

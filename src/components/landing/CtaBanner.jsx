@@ -1,9 +1,9 @@
 import { motion as Motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import { fadeUp } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { CTA_FEATURES } from "../../constants/content";
-import Img from "./Img";
+import Img from "../ui/Img";
 
 export default function CtaBanner() {
   return (

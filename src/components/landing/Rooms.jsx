@@ -23,9 +23,9 @@ import { PiBuildingApartment } from "react-icons/pi";
 import { LuFlower2 } from "react-icons/lu";
 import { motion as Motion } from "framer-motion";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import { COLORS } from "../../constants/theme";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 
 const ROOMS_DATA = [
   {
@@ -142,7 +142,7 @@ export default function Rooms() {
   const others = ROOMS_DATA.slice(1);
 
   return (
-    <section className="py-24" style={{ background: "#f8f8f6" }}>
+    <section className="py-20 md:py-24" style={{ background: "#f8f8f6" }}>
       <div className="max-w-7xl mx-auto px-6">
         <Motion.div {...fadeUp()}>
           <SectionHeader
@@ -152,14 +152,11 @@ export default function Rooms() {
           />
         </Motion.div>
 
-        {/* Main layout: large featured left + sidebar right */}
-        <Motion.div {...fadeUp(0.1)} className="flex gap-5">
-          {/* ── Featured Room ── */}
+        <Motion.div {...fadeUp(0.1)} className="flex flex-col lg:flex-row gap-5">
           <div
             className="bg-white rounded-2xl overflow-hidden shadow-md flex-1"
             style={{ minWidth: 0 }}
           >
-            {/* Hero image */}
             <div className="relative" style={{ height: 340 }}>
               <Img
                 src="/hotel4.jpg"
@@ -167,7 +164,6 @@ export default function Rooms() {
                 className="w-full h-full object-cover"
               />
 
-              {/* Tag pill top-left */}
               {featured.tag && (
                 <span
                   className="absolute top-4 left-4 px-3 py-1 rounded-full font-semibold tracking-widest"
@@ -182,7 +178,6 @@ export default function Rooms() {
                 </span>
               )}
 
-              {/* Info pills bottom-left */}
               <div className="absolute bottom-4 left-4 flex gap-2">
                 <span
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
@@ -214,14 +209,11 @@ export default function Rooms() {
               </div>
             </div>
 
-            {/* Text content */}
             <div className="p-7">
-              {/* Title row + stars */}
               <div className="flex items-start justify-between mb-3">
                 <h3
                   className="text-3xl font-light"
                   style={{
-                    fontFamily: "'Georgia', serif",
                     color: "#1a1a1a",
                     letterSpacing: "-0.3px",
                   }}
@@ -242,7 +234,6 @@ export default function Rooms() {
                 </div>
               </div>
 
-              {/* Description */}
               <p
                 className="text-sm leading-relaxed mb-6"
                 style={{ color: "#888", maxWidth: 580 }}
@@ -250,9 +241,8 @@ export default function Rooms() {
                 {featured.description}
               </p>
 
-              {/* Amenities row */}
               <div
-                className="flex gap-8 pb-6 mb-6"
+                className="flex gap-2 pb-6 mb-6"
                 style={{ borderBottom: "1px solid #efefef" }}
               >
                 {featured.amenities.map((a) => (
@@ -262,25 +252,24 @@ export default function Rooms() {
                     style={{ color: "#666" }}
                   >
                     <AmenityIcon icon={a.icon} />
-                    <span>{a.label}</span>
+                    <span className="text-[10px]">{a.label}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Price + CTA */}
               <div className="flex items-center justify-between">
                 <div className="flex items-baseline gap-0.5">
                   <span className="text-sm text-gray-400">$</span>
                   <span
-                    className="font-bold"
-                    style={{ fontSize: 42, color: "#1a1a1a", lineHeight: 1 }}
+                    className="font-bold text-2xl md:text-4xl"
+                    style={{  color: "#1a1a1a", lineHeight: 1 }}
                   >
                     {featured.price}
                   </span>
                   <span className="text-sm text-gray-400 ml-1">per night</span>
                 </div>
                 <button
-                  className="px-7 py-3 rounded-lg text-white text-sm font-medium"
+                  className=" px-3 py-2 md:px-7 md:py-3 rounded-lg text-white text-sm font-medium"
                   style={{ background: "#2d5a3d" }}
                 >
                   Reserve Suite
@@ -289,11 +278,7 @@ export default function Rooms() {
             </div>
           </div>
 
-          {/* ── Sidebar: stacked room cards ── */}
-          <div
-            className="flex flex-col gap-4"
-            style={{ width: 350, flexShrink: 0 }}
-          >
+          <div className="flex flex-col gap-4 w-full lg:w-[350px] flex-shrink-0">
             {others.map((room, i) => (
               <Motion.div
                 key={room.name}
@@ -301,7 +286,6 @@ export default function Rooms() {
                 className="bg-white rounded-xl overflow-hidden shadow-sm flex"
                 style={{ minHeight: 140 }}
               >
-                {/* Thumbnail */}
                 <div style={{ width: 100, flexShrink: 0 }}>
                   <Img
                     src={room.img}
@@ -310,7 +294,6 @@ export default function Rooms() {
                   />
                 </div>
 
-                {/* Card body */}
                 <div className="p-4 flex flex-col justify-between flex-1 min-w-0">
                   <div>
                     <h4
@@ -325,7 +308,6 @@ export default function Rooms() {
                     >
                       {room.description}
                     </p>
-                    {/* Feature tags */}
                     <div className="flex gap-3 mb-2">
                       {room.features.map((f) => (
                         <span
@@ -340,7 +322,6 @@ export default function Rooms() {
                     </div>
                   </div>
 
-                  {/* Price + Book button */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-baseline gap-0.5">
                       <span
@@ -368,14 +349,13 @@ export default function Rooms() {
       </div>
       <section className="my-20 ">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {GRID_ROOMS.map((room, i) => (
               <Motion.div
                 key={room.name}
                 {...stagger(i)}
                 className="flex flex-col items-center"
               >
-                {/* Image */}
                 <div
                   className="w-full rounded-xl overflow-hidden mb-4"
                   style={{ aspectRatio: "4/3" }}
@@ -387,7 +367,6 @@ export default function Rooms() {
                   />
                 </div>
 
-                {/* Name */}
                 <p
                   className="text-sm font-normal mb-2 text-center"
                   style={{ color: "#1a1a1a" }}
@@ -395,7 +374,6 @@ export default function Rooms() {
                   {room.name}
                 </p>
 
-                {/* Price */}
                 <p className="mb-3 text-center">
                   <span
                     className="font-semibold"
@@ -406,7 +384,6 @@ export default function Rooms() {
                   <span style={{ color: "#4ab5a0", fontSize: 12 }}>/night</span>
                 </p>
 
-                {/* Icons */}
                 <div className="flex gap-4">
                   {room.icons.map((Icon, j) => (
                     <Icon key={j} size={17} style={{ color: "#aaa" }} />

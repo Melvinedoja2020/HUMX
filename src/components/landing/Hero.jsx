@@ -1,25 +1,21 @@
 import { motion as Motion } from "framer-motion";
-import { FaCheck } from "react-icons/fa";
 import { fadeUp } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { HERO_FEATURES, HERO_STATS } from "../../constants/content";
-import Img from "./Img";
-import { div } from "framer-motion/client";
+import Img from "../ui/Img";
 
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[calc(100vh-4rem)] flex items-center overflow-hidden"
       style={{ background: "#e8ede9" }}
     >
-      {/* BG split */}
       <div
         className="absolute right-0 top-0 w-1/2 h-full"
         style={{ background: "#d4e6da" }}
       />
 
       <div className="relative max-w-7xl mx-auto px-6 w-full  pb-16 grid md:grid-cols-2 gap-12 items-center">
-        {/* Left */}
         <div>
           <Motion.p
             {...fadeUp(0.1)}
@@ -46,9 +42,9 @@ export default function Hero() {
             {...fadeUp(0.4)}
             className="flex flex-wrap gap-4 mb-8 text-sm text-gray-600"
           >
-            {HERO_FEATURES.map(({ title, icon }) => (
+            {HERO_FEATURES.map(({ title, Icon }) => (
               <span key={title} className="flex items-center gap-2">
-                {icon}
+                {Icon && <Icon size={16} />}
                 {title}
               </span>
             ))}
@@ -69,7 +65,6 @@ export default function Hero() {
           </Motion.div>
         </div>
 
-        {/* Right – hotel image card */}
         <Motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -83,16 +78,15 @@ export default function Hero() {
               className="w-full h-[500px] object-cover"
             />
           </div>
-          {/* Floating card */}
           <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="absolute -bottom-12 -right-14 bg-white rounded-xl shadow-xl p-4 w-72"
+            className="absolute bottom-40 -right-4 md:-bottom-12 md:-right-14 bg-white rounded-xl shadow-xl p-4 w-52 md:w-72"
           >
             <p className="text-xs text-gray-400 mb-1">Exceptional Experience</p>
             <p
-              className="text-lg font-bold"
+              className="text-sm md:text-lg font-bold"
               style={{ color: COLORS.GREEN_DARK }}
             >
               "Absolutely stunning hotel! The service was impeccable and the
@@ -113,14 +107,13 @@ export default function Hero() {
         </Motion.div>
       </div>
 
-      {/* Stats bar */}
       <div className="absolute bottom-0 left-0 right-0">
         <div className="max-w-7xl mx-auto px-6">
           <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="grid grid-cols-4 bg-white divide-x divide-gray-100"
+            className="grid grid-cols-2 sm:grid-cols-4 bg-white divide-y divide-gray-100 sm:divide-y-0 sm:divide-x"
           >
             {HERO_STATS.map(({ num, label }) => (
               <div key={label} className="py-5 text-center">

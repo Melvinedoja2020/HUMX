@@ -1,10 +1,10 @@
 import { motion as Motion } from "framer-motion";
 import { MdDateRange, MdSchedule, MdLocationOn } from "react-icons/md";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { EVENTS } from "../../constants/content";
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 
 export default function Events() {
   return (

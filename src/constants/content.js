@@ -225,15 +225,15 @@ export const NAV_LINKS = [
   "About",
   "Rooms",
   "Amenities",
-  "Offers",
-  "Events",
+  "location",
+  "pages",
   "Contact",
 ];
 
 export const HERO_FEATURES = [
-  { title: "Free Breakfast", icon: "<FaCoffee />" },
-  { title: "Free WiFi", icon: "<FaWifi />" },
-  { title: "Airport Shuttle", icon: "<FaBus />" },
+  { title: "Free Breakfast", Icon: FaCoffee },
+  { title: "Free WiFi", Icon: FaWifi },
+  { title: "Airport Shuttle", Icon: FaBus },
 ];
 
 export const HERO_STATS = [

@@ -1,9 +1,9 @@
 import { motion as Motion } from "framer-motion";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { OFFERS } from "../../constants/content";
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 import CountdownTimer from "./CountdownTimer";
 
 export default function Offers() {
@@ -72,7 +72,6 @@ export default function Offers() {
           ))}
         </div>
 
-        {/* Countdown banner */}
         <Motion.div
           {...fadeUp(0.2)}
           className="rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6"
