@@ -1,8 +1,8 @@
 import { motion as Motion } from "framer-motion";
 import { fadeUp, stagger } from "../../utils/animations";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { TESTIMONIALS } from "../../constants/content";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../ui/SectionHeader";
 
 export default function Testimonials() {
   return (

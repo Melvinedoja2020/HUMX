@@ -3,9 +3,8 @@ import { FiWifi, FiCheckCircle } from "react-icons/fi";
 import { TbDroplet } from "react-icons/tb";
 import { PiCarLight } from "react-icons/pi";
 import { fadeUp, stagger } from "../../utils/animations";
-
-import SectionHeader from "./SectionHeader";
-import Img from "./Img";
+import SectionHeader from "../ui/SectionHeader";
+import Img from "../ui/Img";
 
 const ICON_MAP = {
   wifi: FiWifi,
@@ -13,7 +12,6 @@ const ICON_MAP = {
   valet: PiCarLight,
 };
 
-// Fallback static data if AMENITIES doesn't match the new shape
 const DEFAULT_AMENITIES = [
   {
     icon: "wifi",
@@ -65,25 +63,21 @@ export default function Amenities() {
                   background: "#fff",
                 }}
               >
-                {/* Image with dark overlay + centered icon */}
                 <div className="relative" style={{ height: 210 }}>
                   <Img
                     src={a.img}
                     alt={a.title}
                     className="w-full h-full object-cover"
                   />
-                  {/* dark overlay */}
                   <div
                     className="absolute inset-0"
                     style={{ background: "rgba(40,50,55,0.38)" }}
                   />
-                  {/* centered icon */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <IconComponent size={48} color="white" strokeWidth={1.5} />
                   </div>
                 </div>
 
-                {/* Card body */}
                 <div className="p-6">
                   <h3
                     className="font-bold mb-3"
@@ -103,7 +97,6 @@ export default function Amenities() {
                     {a.desc}
                   </p>
 
-                  {/* Tags row */}
                   <div className="flex gap-5">
                     {a.tags.map((tag) => (
                       <span

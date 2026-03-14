@@ -1,5 +1,5 @@
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { COLORS, FONTS } from "../../constants/theme";
+import { COLORS } from "../../constants/theme";
 import { FOOTER_COLUMNS } from "../../constants/content";
 
 const SOCIAL_ICONS_MAP = {
@@ -8,8 +8,6 @@ const SOCIAL_ICONS_MAP = {
   in: FaLinkedin,
   ig: FaInstagram,
 };
-
-const IconComponent = SOCIAL_ICONS_MAP["f"];
 
 export default function Footer() {
   return (
